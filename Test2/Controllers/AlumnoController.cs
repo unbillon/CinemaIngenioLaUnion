@@ -13,6 +13,7 @@ namespace Test2.Controllers
         public ActionResult Index()
         {
             //comentario
+            //comentario2
             try
             {
                 string sql = @"select	a.Id as ID,
