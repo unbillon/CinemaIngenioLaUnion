@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Test2.Models.Ciudad>
+
+<select class="form-control" id="CodCiudad" name="CodCiudad">
+
+    @foreach (var item in Model)
+    {
+        <option value="@item.id">@item.Nombre</option> //razor
+               
+    }
+
+
+</select>
+
+
