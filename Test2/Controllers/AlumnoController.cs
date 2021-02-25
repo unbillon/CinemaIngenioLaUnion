@@ -12,6 +12,7 @@ namespace Test2.Controllers
         // GET: Alumno
         public ActionResult Index()
         {
+            //comentario
             try
             {
                 string sql = @"select	a.Id as ID,
