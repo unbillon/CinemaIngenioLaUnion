@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Test2.Models;
+using TMDbLib.Client;
+using TMDbLib.Objects.General;
+using TMDbLib.Objects.Movies;
+using TMDbLib.Objects.Search;
+using Movie = TMDbLib.Objects.Movies.Movie;
 
 namespace Test2.Controllers
 {
@@ -11,7 +17,35 @@ namespace Test2.Controllers
         // GET: CinemaLaUnion
         public ActionResult Index()
         {
-            return View();
+            TMDbClient client = new TMDbClient("38a98b7311a75b1913c0c24280d13024");
+            SearchContainer<SearchMovie> popularMovies = client.GetMoviePopularListAsync("en-US", 1, null).Result;
+            List<SearchMovie> popularMovieList = popularMovies.Results;
+
+
+            List<Pelicula> listPopularMovies = new List<Pelicula>();
+
+            foreach (SearchMovie pularMovie in popularMovieList)
+            {
+                Movie m = client.GetMovieAsync(pularMovie.Id).Result;
+                Pelicula p = new Pelicula();
+                p.Id = m.Id;
+                p.Images = m.Images;
+                p.Title = m.Title;
+                p.BackdropPath = "https://image.tmdb.org/t/p/w500" + m.BackdropPath;
+                p.Credits = m.Credits;
+                p.Reviews = m.Reviews;
+                p.PosterPath = "https://image.tmdb.org/t/p/w500" + m.PosterPath;
+                p.ReleaseDate = m.ReleaseDate;
+                p.Homepage = m.Homepage;
+                p.Recommendations = m.Recommendations;
+                p.Revenue = m.Revenue;
+                p.Runtime = m.Runtime;
+                p.Video = m.Video;
+                listPopularMovies.Add(p);
+            }
+
+            return View(listPopularMovies);
+
         }
     }
 }

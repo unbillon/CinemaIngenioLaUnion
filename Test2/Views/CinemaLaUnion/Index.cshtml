@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<Test2.Models.Pelicula>
 <!DOCTYPE html>
 <!--[if IE 7]>
 <html class="ie ie7 no-js" lang="en-US">
@@ -32,6 +32,7 @@
 </head>
 <body>
     <!--preloading-->
+    <!--
     <div id="preloader">
         <img class="logo" src="images/logo1.png" alt="" width="119" height="58">
         <div id="status">
@@ -39,6 +40,7 @@
             <span></span>
         </div>
     </div>
+        -->
     <!--end of preloading-->
     <!--login form popup-->
     <div class="login-wrapper" id="login-content">
@@ -72,7 +74,7 @@
                 </div>
             </form>
             <div class="row">
-                <p>Or via social</p>
+                <p>OF</p>
                 <div class="social-btn-2">
                     <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
                     <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
@@ -136,86 +138,9 @@
                     <a href="index-2.html"><img class="logo" src="images/logo1.png" alt="" width="119" height="58"></a>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
+
                 <div class="collapse navbar-collapse flex-parent" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav flex-child-menu menu-left">
-                        <li class="hidden">
-                            <a href="#page-top"></a>
-                        </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown">
-                                Home <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="index-2.html">Home 01</a></li>
-                                <li><a href="homev2.html">Home 02</a></li>
-                                <li><a href="homev3.html">Home 03</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                movies<i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Movie grid<i class="ion-ios-arrow-forward"></i></a>
-                                    <ul class="dropdown-menu level2">
-                                        <li><a href="moviegrid.html">Movie grid</a></li>
-                                        <li><a href="moviegridfw.html">movie grid full width</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="movielist.html">Movie list</a></li>
-                                <li><a href="moviesingle.html">Movie single</a></li>
-                                <li class="it-last"><a href="seriessingle.html">Series single</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                celebrities <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="celebritygrid01.html">celebrity grid 01</a></li>
-                                <li><a href="celebritygrid02.html">celebrity grid 02 </a></li>
-                                <li><a href="celebritylist.html">celebrity list</a></li>
-                                <li class="it-last"><a href="celebritysingle.html">celebrity single</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                news <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="bloglist.html">blog List</a></li>
-                                <li><a href="bloggrid.html">blog Grid</a></li>
-                                <li class="it-last"><a href="blogdetail.html">blog Detail</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                community <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="userfavoritegrid.html">user favorite grid</a></li>
-                                <li><a href="userfavoritelist.html">user favorite list</a></li>
-                                <li><a href="userprofile.html">user profile</a></li>
-                                <li class="it-last"><a href="userrate.html">user rate</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav flex-child-menu menu-right">
-                        <li class="dropdown first">
-                            <a class="btn btn-default dropdown-toggle lv1" data-toggle="dropdown" data-hover="dropdown">
-                                pages <i class="fa fa-angle-down" aria-hidden="true"></i>
-                            </a>
-                            <ul class="dropdown-menu level1">
-                                <li><a href="landing.html">Landing</a></li>
-                                <li><a href="404.html">404 Page</a></li>
-                                <li class="it-last"><a href="comingsoon.html">Coming soon</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="#">Help</a></li>
-                        <li class="loginLink"><a href="#">LOG In</a></li>
-                        <li class="btn signupLink"><a href="#">sign up</a></li>
-                    </ul>
+
                 </div>
                 <!-- /.navbar-collapse -->
             </nav>
@@ -236,122 +161,39 @@
         <div class="container">
             <div class="row">
                 <div class="social-link">
-                    <p>Follow us: </p>
+                    <p>Encuentranos en nuestras redes sociales ! </p>
                     <a href="#"><i class="ion-social-facebook"></i></a>
                     <a href="#"><i class="ion-social-twitter"></i></a>
-                    <a href="#"><i class="ion-social-googleplus"></i></a>
                     <a href="#"><i class="ion-social-youtube"></i></a>
                 </div>
-                <div class="slick-multiItemSlider">
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span>
-                            </div>
-                            <h6><a href="#">Interstellar</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="yell"><a href="#">action</a></span>
-                            </div>
-                            <h6><a href="#">The revenant</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider3.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="green"><a href="#">comedy</a></span>
-                            </div>
-                            <h6><a href="#">Die hard</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider4.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">advanture</a></span>
-                            </div>
-                            <h6><a href="#">The walk</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider1.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span>
-                            </div>
-                            <h6><a href="#">Interstellar</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <a href="#"><img src="images/uploads/slider2.jpg" alt="" width="285" height="437"></a>
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="yell"><a href="#">action</a></span>
-                            </div>
-                            <h6><a href="#">The revenant</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="green"><a href="#">comedy</a></span>
-                            </div>
-                            <h6><a href="#">Die hard</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <img src="images/uploads/slider4.jpg" alt="" width="285" height="437">
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="blue"><a href="#">Sci-fi</a></span> <span class="orange"><a href="#">advanture</a></span>
-                            </div>
-                            <h6><a href="#">The walk</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
-                    <div class="movie-item">
-                        <div class="mv-img">
-                            <img src="images/uploads/slider3.jpg" alt="" width="285" height="437">
-                        </div>
-                        <div class="title-in">
-                            <div class="cate">
-                                <span class="green"><a href="#">comedy</a></span>
-                            </div>
-                            <h6><a href="#">Die hard</a></h6>
-                            <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
-                        </div>
-                    </div>
+
+                <div class="title-hd">
+                    <h2>PROXIMAMENTE</h2>
+                    <a href="#" class="viewall">View all <i class="ion-ios-arrow-right"></i></a>
                 </div>
+
+                <div class="slick-multiItemSlider">
+
+                    @foreach (var item in Model)
+                    {
+
+
+                        <div class="movie-item">
+                            <div class="mv-img">
+                                <a href="#"><img src=@Html.DisplayFor(modelItem => item.PosterPath) alt="" width="285" height="437"></a>
+                            </div>
+                            <div class="title-in">
+                                <div class="cate">
+                                    <span class="blue"><a href="#">@Html.DisplayFor(modelItem => item.Title)</a></span>
+                                </div>
+                                <h6><a href="#">@Html.DisplayFor(modelItem => item.Title)</a></h6>
+                                <p><i class="ion-android-star"></i><span>7.4</span> /10</p>
+                            </div>
+                        </div>
+
+                    }
+                        
+                    </div>
             </div>
         </div>
     </div>

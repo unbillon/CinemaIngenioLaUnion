@@ -61,6 +61,12 @@ namespace Test2.Controllers
                 p.Revenue = m.Revenue;
                 p.Runtime = m.Runtime;
                 p.Video = m.Video;
+                p.Status = m.Status;
+                p.Tagline = m.Tagline;
+                p.Overview = m.Overview;
+                p.ImdbId = m.ImdbId;
+                p.OriginalLanguage = m.OriginalLanguage;
+                m.c
                 listPopularMovies.Add(p);
             }
             
