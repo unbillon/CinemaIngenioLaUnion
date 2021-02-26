@@ -63,5 +63,11 @@ namespace Test2.Models
         public string OriginalTitle { get; set; }
         public double Popularity { get; set; }
         public int VoteCount { get; set; }
+
+        public ResultContainer<Video> listVideo { get; set; }
+
+        public string trailerPath { get; set; }
+
+         
     }
 }

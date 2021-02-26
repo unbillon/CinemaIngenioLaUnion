@@ -66,12 +66,23 @@ namespace Test2.Controllers
                 p.Overview = m.Overview;
                 p.ImdbId = m.ImdbId;
                 p.OriginalLanguage = m.OriginalLanguage;
-                m.c
+                p.VoteAverage = m.VoteAverage;
+                p.Genres = m.Genres;
+                
                 listPopularMovies.Add(p);
             }
             
             return View(listPopularMovies);
             
+        }
+
+
+        public ActionResult DetallePelicula(Pelicula p)
+        {
+
+                    return View(p);
+
+
         }
     }
 }

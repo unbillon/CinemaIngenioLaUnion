@@ -1,0 +1,178 @@
+﻿@model Test2.Models.Pelicula
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetallePelicula</title>
+</head>
+<body>
+    <div>
+        <h4>Pelicula</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ReleaseDate)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Revenue)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Revenue)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Runtime)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Runtime)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Tagline)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Tagline)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Title)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Title)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Video)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Video)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.VoteAverage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.VoteAverage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.PosterPath)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PosterPath)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Overview)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Overview)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Adult)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Adult)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.BackdropPath)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.BackdropPath)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Budget)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Budget)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Homepage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Homepage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.ImdbId)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.ImdbId)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.OriginalLanguage)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OriginalLanguage)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.OriginalTitle)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.OriginalTitle)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Popularity)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Popularity)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.VoteCount)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.VoteCount)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

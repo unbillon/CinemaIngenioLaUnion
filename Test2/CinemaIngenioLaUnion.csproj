@@ -182,6 +182,7 @@
     <Compile Include="Models\Ciudad.cs">
       <DependentUpon>ModelAlumno.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\IndexModel.cs" />
     <Compile Include="Models\ModelAlumno.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -454,6 +455,8 @@
     <Content Include="js\jquery.js" />
     <Content Include="js\plugins.js" />
     <Content Include="js\plugins2.js" />
+    <Content Include="Views\CinemaLaUnion\DetallePelicula.cshtml" />
+    <None Include="Views\CinemaLaUnion\moviesingle.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -482,6 +485,7 @@
     <Content Include="fonts\fontawesome-webfont93e3.woff2" />
     <Content Include="fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Views\CinemaLaUnion\Index.cshtml" />
+    <Content Include="Views\Cinema\DetallePelicula.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
