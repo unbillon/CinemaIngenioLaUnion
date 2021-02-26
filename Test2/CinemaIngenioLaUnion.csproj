@@ -230,6 +230,7 @@
     <Content Include="Models\ModelAlumno.edmx.diagram">
       <DependentUpon>ModelAlumno.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\CinemaIngenioLaUnion20210226093714 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
