@@ -30,6 +30,8 @@ namespace Test2.Models
         public virtual DbSet<Ciudad> Ciudad { get; set; }
         public virtual DbSet<funcion> funcion { get; set; }
         public virtual DbSet<sala> sala { get; set; }
+        public virtual DbSet<ticket> ticket { get; set; }
+        public virtual DbSet<ticket_asiento> ticket_asiento { get; set; }
         public virtual DbSet<tipo_sala> tipo_sala { get; set; }
     }
 }

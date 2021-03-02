@@ -32,7 +32,7 @@ namespace Test2.Controllers
             return View(servicePelicula.obtenerFunciones(id));
         }
 
-        public ActionResult Funcion(int id) {
+        public ActionResult GuardarTicket() {
             return View();
         }
 

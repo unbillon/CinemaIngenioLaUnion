@@ -11,19 +11,23 @@ namespace Test2.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class funcion
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public funcion()
+        {
+            this.ticket = new HashSet<ticket>();
+        }
+    
         public int id_funcion { get; set; }
         public int id_sala { get; set; }
         public int id_pelicula { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public System.DateTime horario { get; set; }
         public string activo { get; set; }
     
         public virtual sala sala { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ticket> ticket { get; set; }
     }
 }

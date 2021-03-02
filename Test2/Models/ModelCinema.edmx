@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="INGENIO_LA_UNIONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="INGENIO_LA_UNIONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="ID" />
@@ -50,6 +50,24 @@
           <Property Name="ubicacion" Type="int" Nullable="false" />
           <Property Name="id_tipo_sala" Type="int" Nullable="false" />
           <Property Name="nombre_sala" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="id_ticket" />
+          </Key>
+          <Property Name="id_ticket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_funcion" Type="int" Nullable="false" />
+          <Property Name="fecha_compra" Type="datetime" Nullable="false" />
+          <Property Name="costo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ticket_asiento">
+          <Key>
+            <PropertyRef Name="id_ticket_asiento" />
+          </Key>
+          <Property Name="id_ticket_asiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_ticket" Type="int" Nullable="false" />
+          <Property Name="id_asiento" Type="int" Nullable="false" />
+          <Property Name="fecha_ingreso" Type="datetime" />
         </EntityType>
         <EntityType Name="tipo_sala">
           <Key>
@@ -107,12 +125,50 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ticket_asiento_asiento">
+          <End Role="asiento" Type="Self.asiento" Multiplicity="1" />
+          <End Role="ticket_asiento" Type="Self.ticket_asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asiento">
+              <PropertyRef Name="id_asiento" />
+            </Principal>
+            <Dependent Role="ticket_asiento">
+              <PropertyRef Name="id_asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_asiento_ticket">
+          <End Role="ticket" Type="Self.ticket" Multiplicity="1" />
+          <End Role="ticket_asiento" Type="Self.ticket_asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticket">
+              <PropertyRef Name="id_ticket" />
+            </Principal>
+            <Dependent Role="ticket_asiento">
+              <PropertyRef Name="id_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ticket_funcion">
+          <End Role="funcion" Type="Self.funcion" Multiplicity="1" />
+          <End Role="ticket" Type="Self.ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcion">
+              <PropertyRef Name="id_funcion" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_funcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="INGENIO_LA_UNIONModelStoreContainer">
           <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="asiento" EntityType="Self.asiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="funcion" EntityType="Self.funcion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sala" EntityType="Self.sala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticket" EntityType="Self.ticket" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ticket_asiento" EntityType="Self.ticket_asiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tipo_sala" EntityType="Self.tipo_sala" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Alumno_Ciudad" Association="Self.FK_Alumno_Ciudad">
             <End Role="Ciudad" EntitySet="Ciudad" />
@@ -130,24 +186,73 @@
             <End Role="tipo_sala" EntitySet="tipo_sala" />
             <End Role="sala" EntitySet="sala" />
           </AssociationSet>
+          <AssociationSet Name="FK_ticket_asiento_asiento" Association="Self.FK_ticket_asiento_asiento">
+            <End Role="asiento" EntitySet="asiento" />
+            <End Role="ticket_asiento" EntitySet="ticket_asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_asiento_ticket" Association="Self.FK_ticket_asiento_ticket">
+            <End Role="ticket" EntitySet="ticket" />
+            <End Role="ticket_asiento" EntitySet="ticket_asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_funcion" Association="Self.FK_ticket_funcion">
+            <End Role="funcion" EntitySet="funcion" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="INGENIO_LA_UNIONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="INGENIO_LA_UNIONEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="INGENIO_LA_UNIONModel.Alumno" />
+          <EntitySet Name="asiento" EntityType="INGENIO_LA_UNIONModel.asiento" />
+          <EntitySet Name="Ciudad" EntityType="INGENIO_LA_UNIONModel.Ciudad" />
+          <EntitySet Name="funcion" EntityType="INGENIO_LA_UNIONModel.funcion" />
+          <EntitySet Name="sala" EntityType="INGENIO_LA_UNIONModel.sala" />
+          <EntitySet Name="ticket" EntityType="INGENIO_LA_UNIONModel.ticket" />
+          <EntitySet Name="ticket_asiento" EntityType="INGENIO_LA_UNIONModel.ticket_asiento" />
+          <EntitySet Name="tipo_sala" EntityType="INGENIO_LA_UNIONModel.tipo_sala" />
+          <AssociationSet Name="FK_Alumno_Ciudad" Association="INGENIO_LA_UNIONModel.FK_Alumno_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asiento_sala" Association="INGENIO_LA_UNIONModel.FK_asiento_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="asiento" EntitySet="asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_asiento_asiento" Association="INGENIO_LA_UNIONModel.FK_ticket_asiento_asiento">
+            <End Role="asiento" EntitySet="asiento" />
+            <End Role="ticket_asiento" EntitySet="ticket_asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_funcion_sala" Association="INGENIO_LA_UNIONModel.FK_funcion_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="funcion" EntitySet="funcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_funcion" Association="INGENIO_LA_UNIONModel.FK_ticket_funcion">
+            <End Role="funcion" EntitySet="funcion" />
+            <End Role="ticket" EntitySet="ticket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sala_tipo_sala" Association="INGENIO_LA_UNIONModel.FK_sala_tipo_sala">
+            <End Role="tipo_sala" EntitySet="tipo_sala" />
+            <End Role="sala" EntitySet="sala" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ticket_asiento_ticket" Association="INGENIO_LA_UNIONModel.FK_ticket_asiento_ticket">
+            <End Role="ticket" EntitySet="ticket" />
+            <End Role="ticket_asiento" EntitySet="ticket_asiento" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Alumno">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Apellidos" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Edad" Type="Int32" Nullable="false" />
-          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Sexo" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
           <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CodCiudad" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Alumno_Ciudad" FromRole="Alumno" ToRole="Ciudad" />
+          <NavigationProperty Name="Ciudad" Relationship="INGENIO_LA_UNIONModel.FK_Alumno_Ciudad" FromRole="Alumno" ToRole="Ciudad" />
         </EntityType>
         <EntityType Name="asiento">
           <Key>
@@ -155,16 +260,17 @@
           </Key>
           <Property Name="id_asiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_sala" Type="Int32" />
-          <Property Name="numero_asiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="sala" Relationship="Self.FK_asiento_sala" FromRole="asiento" ToRole="sala" />
+          <Property Name="numero_asiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sala" Relationship="INGENIO_LA_UNIONModel.FK_asiento_sala" FromRole="asiento" ToRole="sala" />
+          <NavigationProperty Name="ticket_asiento" Relationship="INGENIO_LA_UNIONModel.FK_ticket_asiento_asiento" FromRole="asiento" ToRole="ticket_asiento" />
         </EntityType>
         <EntityType Name="Ciudad">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Alumno" Relationship="Self.FK_Alumno_Ciudad" FromRole="Ciudad" ToRole="Alumno" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Alumno" Relationship="INGENIO_LA_UNIONModel.FK_Alumno_Ciudad" FromRole="Ciudad" ToRole="Alumno" />
         </EntityType>
         <EntityType Name="funcion">
           <Key>
@@ -174,8 +280,9 @@
           <Property Name="id_sala" Type="Int32" Nullable="false" />
           <Property Name="id_pelicula" Type="Int32" Nullable="false" />
           <Property Name="horario" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="activo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="sala" Relationship="Self.FK_funcion_sala" FromRole="funcion" ToRole="sala" />
+          <Property Name="activo" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sala" Relationship="INGENIO_LA_UNIONModel.FK_funcion_sala" FromRole="funcion" ToRole="sala" />
+          <NavigationProperty Name="ticket" Relationship="INGENIO_LA_UNIONModel.FK_ticket_funcion" FromRole="funcion" ToRole="ticket" />
         </EntityType>
         <EntityType Name="sala">
           <Key>
@@ -184,23 +291,45 @@
           <Property Name="id_sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ubicacion" Type="Int32" Nullable="false" />
           <Property Name="id_tipo_sala" Type="Int32" Nullable="false" />
-          <Property Name="nombre_sala" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="asiento" Relationship="Self.FK_asiento_sala" FromRole="sala" ToRole="asiento" />
-          <NavigationProperty Name="funcion" Relationship="Self.FK_funcion_sala" FromRole="sala" ToRole="funcion" />
-          <NavigationProperty Name="tipo_sala" Relationship="Self.FK_sala_tipo_sala" FromRole="sala" ToRole="tipo_sala" />
+          <Property Name="nombre_sala" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="asiento" Relationship="INGENIO_LA_UNIONModel.FK_asiento_sala" FromRole="sala" ToRole="asiento" />
+          <NavigationProperty Name="funcion" Relationship="INGENIO_LA_UNIONModel.FK_funcion_sala" FromRole="sala" ToRole="funcion" />
+          <NavigationProperty Name="tipo_sala" Relationship="INGENIO_LA_UNIONModel.FK_sala_tipo_sala" FromRole="sala" ToRole="tipo_sala" />
+        </EntityType>
+        <EntityType Name="ticket">
+          <Key>
+            <PropertyRef Name="id_ticket" />
+          </Key>
+          <Property Name="id_ticket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_funcion" Type="Int32" Nullable="false" />
+          <Property Name="fecha_compra" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="costo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="funcion" Relationship="INGENIO_LA_UNIONModel.FK_ticket_funcion" FromRole="ticket" ToRole="funcion" />
+          <NavigationProperty Name="ticket_asiento" Relationship="INGENIO_LA_UNIONModel.FK_ticket_asiento_ticket" FromRole="ticket" ToRole="ticket_asiento" />
+        </EntityType>
+        <EntityType Name="ticket_asiento">
+          <Key>
+            <PropertyRef Name="id_ticket_asiento" />
+          </Key>
+          <Property Name="id_ticket_asiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_ticket" Type="Int32" Nullable="false" />
+          <Property Name="id_asiento" Type="Int32" Nullable="false" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="asiento" Relationship="INGENIO_LA_UNIONModel.FK_ticket_asiento_asiento" FromRole="ticket_asiento" ToRole="asiento" />
+          <NavigationProperty Name="ticket" Relationship="INGENIO_LA_UNIONModel.FK_ticket_asiento_ticket" FromRole="ticket_asiento" ToRole="ticket" />
         </EntityType>
         <EntityType Name="tipo_sala">
           <Key>
             <PropertyRef Name="id_tipo_sala" />
           </Key>
           <Property Name="id_tipo_sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="sala" Relationship="Self.FK_sala_tipo_sala" FromRole="tipo_sala" ToRole="sala" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="sala" Relationship="INGENIO_LA_UNIONModel.FK_sala_tipo_sala" FromRole="tipo_sala" ToRole="sala" />
         </EntityType>
         <Association Name="FK_Alumno_Ciudad">
-          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
-          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <End Type="INGENIO_LA_UNIONModel.Ciudad" Role="Ciudad" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.Alumno" Role="Alumno" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Ciudad">
               <PropertyRef Name="id" />
@@ -211,8 +340,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_asiento_sala">
-          <End Role="sala" Type="Self.sala" Multiplicity="0..1" />
-          <End Role="asiento" Type="Self.asiento" Multiplicity="*" />
+          <End Type="INGENIO_LA_UNIONModel.sala" Role="sala" Multiplicity="0..1" />
+          <End Type="INGENIO_LA_UNIONModel.asiento" Role="asiento" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="sala">
               <PropertyRef Name="id_sala" />
@@ -222,9 +351,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ticket_asiento_asiento">
+          <End Type="INGENIO_LA_UNIONModel.asiento" Role="asiento" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.ticket_asiento" Role="ticket_asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="asiento">
+              <PropertyRef Name="id_asiento" />
+            </Principal>
+            <Dependent Role="ticket_asiento">
+              <PropertyRef Name="id_asiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_funcion_sala">
-          <End Role="sala" Type="Self.sala" Multiplicity="1" />
-          <End Role="funcion" Type="Self.funcion" Multiplicity="*" />
+          <End Type="INGENIO_LA_UNIONModel.sala" Role="sala" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.funcion" Role="funcion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="sala">
               <PropertyRef Name="id_sala" />
@@ -234,9 +375,21 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ticket_funcion">
+          <End Type="INGENIO_LA_UNIONModel.funcion" Role="funcion" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.ticket" Role="ticket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcion">
+              <PropertyRef Name="id_funcion" />
+            </Principal>
+            <Dependent Role="ticket">
+              <PropertyRef Name="id_funcion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_sala_tipo_sala">
-          <End Role="tipo_sala" Type="Self.tipo_sala" Multiplicity="1" />
-          <End Role="sala" Type="Self.sala" Multiplicity="*" />
+          <End Type="INGENIO_LA_UNIONModel.tipo_sala" Role="tipo_sala" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.sala" Role="sala" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="tipo_sala">
               <PropertyRef Name="id_tipo_sala" />
@@ -246,31 +399,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="INGENIO_LA_UNIONEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
-          <EntitySet Name="asiento" EntityType="Self.asiento" />
-          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
-          <EntitySet Name="funcion" EntityType="Self.funcion" />
-          <EntitySet Name="sala" EntityType="Self.sala" />
-          <EntitySet Name="tipo_sala" EntityType="Self.tipo_sala" />
-          <AssociationSet Name="FK_Alumno_Ciudad" Association="Self.FK_Alumno_Ciudad">
-            <End Role="Ciudad" EntitySet="Ciudad" />
-            <End Role="Alumno" EntitySet="Alumno" />
-          </AssociationSet>
-          <AssociationSet Name="FK_asiento_sala" Association="Self.FK_asiento_sala">
-            <End Role="sala" EntitySet="sala" />
-            <End Role="asiento" EntitySet="asiento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_funcion_sala" Association="Self.FK_funcion_sala">
-            <End Role="sala" EntitySet="sala" />
-            <End Role="funcion" EntitySet="funcion" />
-          </AssociationSet>
-          <AssociationSet Name="FK_sala_tipo_sala" Association="Self.FK_sala_tipo_sala">
-            <End Role="tipo_sala" EntitySet="tipo_sala" />
-            <End Role="sala" EntitySet="sala" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema>
+        <Association Name="FK_ticket_asiento_ticket">
+          <End Type="INGENIO_LA_UNIONModel.ticket" Role="ticket" Multiplicity="1" />
+          <End Type="INGENIO_LA_UNIONModel.ticket_asiento" Role="ticket_asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ticket">
+              <PropertyRef Name="id_ticket" />
+            </Principal>
+            <Dependent Role="ticket_asiento">
+              <PropertyRef Name="id_ticket" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -279,60 +420,80 @@
           <EntitySetMapping Name="Alumno">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.Alumno">
               <MappingFragment StoreEntitySet="Alumno">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Edad" ColumnName="Edad" />
-                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
-                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
                 <ScalarProperty Name="CodCiudad" ColumnName="CodCiudad" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="asiento">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.asiento">
               <MappingFragment StoreEntitySet="asiento">
-                <ScalarProperty Name="id_asiento" ColumnName="id_asiento" />
-                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
                 <ScalarProperty Name="numero_asiento" ColumnName="numero_asiento" />
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+                <ScalarProperty Name="id_asiento" ColumnName="id_asiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Ciudad">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.Ciudad">
               <MappingFragment StoreEntitySet="Ciudad">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="funcion">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.funcion">
               <MappingFragment StoreEntitySet="funcion">
-                <ScalarProperty Name="id_funcion" ColumnName="id_funcion" />
-                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
-                <ScalarProperty Name="id_pelicula" ColumnName="id_pelicula" />
-                <ScalarProperty Name="horario" ColumnName="horario" />
                 <ScalarProperty Name="activo" ColumnName="activo" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="id_pelicula" ColumnName="id_pelicula" />
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+                <ScalarProperty Name="id_funcion" ColumnName="id_funcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sala">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.sala">
               <MappingFragment StoreEntitySet="sala">
-                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
-                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
-                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
                 <ScalarProperty Name="nombre_sala" ColumnName="nombre_sala" />
+                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.ticket">
+              <MappingFragment StoreEntitySet="ticket">
+                <ScalarProperty Name="costo" ColumnName="costo" />
+                <ScalarProperty Name="fecha_compra" ColumnName="fecha_compra" />
+                <ScalarProperty Name="id_funcion" ColumnName="id_funcion" />
+                <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ticket_asiento">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.ticket_asiento">
+              <MappingFragment StoreEntitySet="ticket_asiento">
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="id_asiento" ColumnName="id_asiento" />
+                <ScalarProperty Name="id_ticket" ColumnName="id_ticket" />
+                <ScalarProperty Name="id_ticket_asiento" ColumnName="id_ticket_asiento" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tipo_sala">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.tipo_sala">
               <MappingFragment StoreEntitySet="tipo_sala">
-                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

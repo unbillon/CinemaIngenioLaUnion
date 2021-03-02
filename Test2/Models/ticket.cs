@@ -12,19 +12,20 @@ namespace Test2.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class asiento
+    public partial class ticket
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public asiento()
+        public ticket()
         {
             this.ticket_asiento = new HashSet<ticket_asiento>();
         }
     
-        public int id_asiento { get; set; }
-        public Nullable<int> id_sala { get; set; }
-        public string numero_asiento { get; set; }
+        public int id_ticket { get; set; }
+        public int id_funcion { get; set; }
+        public System.DateTime fecha_compra { get; set; }
+        public int costo { get; set; }
     
-        public virtual sala sala { get; set; }
+        public virtual funcion funcion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ticket_asiento> ticket_asiento { get; set; }
     }
