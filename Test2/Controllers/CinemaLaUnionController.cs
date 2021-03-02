@@ -28,10 +28,12 @@ namespace Test2.Controllers
 
        
         public ActionResult DetallePelicula(int id)
-        {
-            
+        {            
             return View(servicePelicula.obtenerFunciones(id));
+        }
 
+        public ActionResult Funcion(int id) {
+            return View();
         }
 
 

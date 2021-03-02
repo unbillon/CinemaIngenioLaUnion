@@ -201,33 +201,39 @@
                                     </div>
 
                                     <div class="sb-it">
-
-                                        @{
-                                            DateTime tempDate = new DateTime();
-                                            String tipoSala = "";
+                                        <table>
 
 
-                                            foreach (var item in Model.listFunciones)
-                                            {
 
-                                                if (tempDate != item.horario)
+                                            @{
+                                                DateTime tempDate = new DateTime();
+                                                String tipoSala = "";
+                                                foreach (var item in Model.listFunciones)
                                                 {
+                                                                                        <tr>
+                                                                                            <td>
 
-                                                    <h6>@Html.DisplayFor(date => item.horario.Day) / @Html.DisplayFor(date => item.horario.Month) / @Html.DisplayFor(date => item.horario.Year)</h6>
-                                                    tipoSala = "";
-                                                }
-                                                if (tipoSala != item.sala.tipo_sala.Nombre)
-                                                {
-                                                    @Html.DisplayFor(ltiposala => item.sala.tipo_sala.Nombre)
-                                                }
-                                                <p class="tags">
-                                                    <span class="time"><a href="#">@Html.DisplayFor(modelItem => item.horario.Hour):@Html.DisplayFor(modelItem => item.horario.Minute)</a></span>
-                                                </p>
-                                                tempDate = item.horario;
-                                                tipoSala = item.sala.tipo_sala.Nombre;
+                                                                                                @if (tempDate != item.horario.Date)
+                                                                                                {
 
-                                            }
-                                        }
+                                                                                                    <h6>@Html.DisplayFor(date => item.horario.Day) / @Html.DisplayFor(date => item.horario.Month) / @Html.DisplayFor(date => item.horario.Year)</h6>
+                                                                                                    tipoSala = "";
+                                                                                                    tempDate = item.horario.Date;
+                                                                                                    tipoSala = item.sala.tipo_sala.Nombre;
+                                                                                                }
+
+                                                                                                <p class="tags">
+                                                                                                    <span class="time"><a href="#">@Html.DisplayFor(modelItem => item.horario.Hour):@Html.DisplayFor(modelItem => item.horario.Minute) - @Html.DisplayFor(modelItem => item.sala.tipo_sala.Nombre)</a></span>
+                                                                                                </p>
+
+
+                                                                                            </td>
+                                                                                        </tr>
+                                                        }
+                                                        }
+                                                    
+
+                                                </table>
                                     </div>
                                 </div>
 

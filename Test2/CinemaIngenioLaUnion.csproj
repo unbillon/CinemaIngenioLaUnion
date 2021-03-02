@@ -470,6 +470,7 @@
     <Content Include="js\plugins2.js" />
     <Content Include="Views\CinemaLaUnion\DetallePelicula.cshtml" />
     <None Include="Views\CinemaLaUnion\moviesingle.cshtml" />
+    <Content Include="Views\Cinema\userprofile.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
