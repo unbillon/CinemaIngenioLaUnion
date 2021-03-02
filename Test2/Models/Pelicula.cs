@@ -12,24 +12,24 @@ namespace Test2.Models
 {
     public class Pelicula
     {
+     
 
-       
         public List<ProductionCountry> ProductionCountries { get; set; }
-    
+
         public DateTime? ReleaseDate { get; set; }
-        
+
         public ResultContainer<ReleaseDatesContainer> ReleaseDates { get; set; }
-        
+
         public ExternalIdsMovie ExternalIds { get; set; }
-        
+
         public Releases Releases { get; set; }
-        
+
         public long Revenue { get; set; }
-     
+
         public SearchContainer<ReviewBase> Reviews { get; set; }
-     
+
         public int? Runtime { get; set; }
-    
+
         public SearchContainer<SearchMovie> Similar { get; set; }
 
         public SearchContainer<SearchMovie> Recommendations { get; set; }
@@ -52,6 +52,8 @@ namespace Test2.Models
         public long Budget { get; set; }
         public ChangesContainer Changes { get; set; }
         public Credits Credits { get; set; }
+
+        public List<Cast> listCast { get; set; }
         public List<Genre> Genres { get; set; }
         public string Homepage { get; set; }
         public int Id { get; set; }
@@ -68,6 +70,12 @@ namespace Test2.Models
 
         public string trailerPath { get; set; }
 
-         
+        public DateTime horario { get; set; }
+
+        public sala sala { get; set; }
+
+        public List<funcion> listFunciones{get; set;}
+
+
     }
 }

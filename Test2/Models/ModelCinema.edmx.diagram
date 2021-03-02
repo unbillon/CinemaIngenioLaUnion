@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="5accf2b4a32246bb89e6bffa009f92d0" Name="Diagram1">
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.Alumno" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.asiento" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.Ciudad" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.funcion" Width="1.5" PointX="5.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.sala" Width="1.5" PointX="3" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="INGENIO_LA_UNIONModel.tipo_sala" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <AssociationConnector Association="INGENIO_LA_UNIONModel.FK_Alumno_Ciudad" ManuallyRouted="false" />
+        <AssociationConnector Association="INGENIO_LA_UNIONModel.FK_asiento_sala" ManuallyRouted="false" />
+        <AssociationConnector Association="INGENIO_LA_UNIONModel.FK_funcion_sala" ManuallyRouted="false" />
+        <AssociationConnector Association="INGENIO_LA_UNIONModel.FK_sala_tipo_sala" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="INGENIO_LA_UNIONModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombres" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Apellidos" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Edad" Type="int" Nullable="false" />
+          <Property Name="Sexo" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="FechaRegistro" Type="datetime" Nullable="false" />
+          <Property Name="CodCiudad" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="asiento">
+          <Key>
+            <PropertyRef Name="id_asiento" />
+          </Key>
+          <Property Name="id_asiento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_sala" Type="int" />
+          <Property Name="numero_asiento" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="funcion">
+          <Key>
+            <PropertyRef Name="id_funcion" />
+          </Key>
+          <Property Name="id_funcion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_sala" Type="int" Nullable="false" />
+          <Property Name="id_pelicula" Type="int" Nullable="false" />
+          <Property Name="horario" Type="datetime" Nullable="false" />
+          <Property Name="activo" Type="nvarchar" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sala">
+          <Key>
+            <PropertyRef Name="id_sala" />
+          </Key>
+          <Property Name="id_sala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ubicacion" Type="int" Nullable="false" />
+          <Property Name="id_tipo_sala" Type="int" Nullable="false" />
+          <Property Name="nombre_sala" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tipo_sala">
+          <Key>
+            <PropertyRef Name="id_tipo_sala" />
+          </Key>
+          <Property Name="id_tipo_sala" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Alumno_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="CodCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asiento_sala">
+          <End Role="sala" Type="Self.sala" Multiplicity="0..1" />
+          <End Role="asiento" Type="Self.asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sala">
+              <PropertyRef Name="id_sala" />
+            </Principal>
+            <Dependent Role="asiento">
+              <PropertyRef Name="id_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_funcion_sala">
+          <End Role="sala" Type="Self.sala" Multiplicity="1" />
+          <End Role="funcion" Type="Self.funcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sala">
+              <PropertyRef Name="id_sala" />
+            </Principal>
+            <Dependent Role="funcion">
+              <PropertyRef Name="id_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sala_tipo_sala">
+          <End Role="tipo_sala" Type="Self.tipo_sala" Multiplicity="1" />
+          <End Role="sala" Type="Self.sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_sala">
+              <PropertyRef Name="id_tipo_sala" />
+            </Principal>
+            <Dependent Role="sala">
+              <PropertyRef Name="id_tipo_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INGENIO_LA_UNIONModelStoreContainer">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="asiento" EntityType="Self.asiento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="funcion" EntityType="Self.funcion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sala" EntityType="Self.sala" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_sala" EntityType="Self.tipo_sala" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Alumno_Ciudad" Association="Self.FK_Alumno_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asiento_sala" Association="Self.FK_asiento_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="asiento" EntitySet="asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_funcion_sala" Association="Self.FK_funcion_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="funcion" EntitySet="funcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sala_tipo_sala" Association="Self.FK_sala_tipo_sala">
+            <End Role="tipo_sala" EntitySet="tipo_sala" />
+            <End Role="sala" EntitySet="sala" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="INGENIO_LA_UNIONModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumno">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Apellidos" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Edad" Type="Int32" Nullable="false" />
+          <Property Name="Sexo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="FechaRegistro" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CodCiudad" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Ciudad" Relationship="Self.FK_Alumno_Ciudad" FromRole="Alumno" ToRole="Ciudad" />
+        </EntityType>
+        <EntityType Name="asiento">
+          <Key>
+            <PropertyRef Name="id_asiento" />
+          </Key>
+          <Property Name="id_asiento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_sala" Type="Int32" />
+          <Property Name="numero_asiento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="sala" Relationship="Self.FK_asiento_sala" FromRole="asiento" ToRole="sala" />
+        </EntityType>
+        <EntityType Name="Ciudad">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Alumno" Relationship="Self.FK_Alumno_Ciudad" FromRole="Ciudad" ToRole="Alumno" />
+        </EntityType>
+        <EntityType Name="funcion">
+          <Key>
+            <PropertyRef Name="id_funcion" />
+          </Key>
+          <Property Name="id_funcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_sala" Type="Int32" Nullable="false" />
+          <Property Name="id_pelicula" Type="Int32" Nullable="false" />
+          <Property Name="horario" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="activo" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="sala" Relationship="Self.FK_funcion_sala" FromRole="funcion" ToRole="sala" />
+        </EntityType>
+        <EntityType Name="sala">
+          <Key>
+            <PropertyRef Name="id_sala" />
+          </Key>
+          <Property Name="id_sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ubicacion" Type="Int32" Nullable="false" />
+          <Property Name="id_tipo_sala" Type="Int32" Nullable="false" />
+          <Property Name="nombre_sala" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="asiento" Relationship="Self.FK_asiento_sala" FromRole="sala" ToRole="asiento" />
+          <NavigationProperty Name="funcion" Relationship="Self.FK_funcion_sala" FromRole="sala" ToRole="funcion" />
+          <NavigationProperty Name="tipo_sala" Relationship="Self.FK_sala_tipo_sala" FromRole="sala" ToRole="tipo_sala" />
+        </EntityType>
+        <EntityType Name="tipo_sala">
+          <Key>
+            <PropertyRef Name="id_tipo_sala" />
+          </Key>
+          <Property Name="id_tipo_sala" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="sala" Relationship="Self.FK_sala_tipo_sala" FromRole="tipo_sala" ToRole="sala" />
+        </EntityType>
+        <Association Name="FK_Alumno_Ciudad">
+          <End Role="Ciudad" Type="Self.Ciudad" Multiplicity="1" />
+          <End Role="Alumno" Type="Self.Alumno" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudad">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Alumno">
+              <PropertyRef Name="CodCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_asiento_sala">
+          <End Role="sala" Type="Self.sala" Multiplicity="0..1" />
+          <End Role="asiento" Type="Self.asiento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sala">
+              <PropertyRef Name="id_sala" />
+            </Principal>
+            <Dependent Role="asiento">
+              <PropertyRef Name="id_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_funcion_sala">
+          <End Role="sala" Type="Self.sala" Multiplicity="1" />
+          <End Role="funcion" Type="Self.funcion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="sala">
+              <PropertyRef Name="id_sala" />
+            </Principal>
+            <Dependent Role="funcion">
+              <PropertyRef Name="id_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_sala_tipo_sala">
+          <End Role="tipo_sala" Type="Self.tipo_sala" Multiplicity="1" />
+          <End Role="sala" Type="Self.sala" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_sala">
+              <PropertyRef Name="id_tipo_sala" />
+            </Principal>
+            <Dependent Role="sala">
+              <PropertyRef Name="id_tipo_sala" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="INGENIO_LA_UNIONEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumno" EntityType="Self.Alumno" />
+          <EntitySet Name="asiento" EntityType="Self.asiento" />
+          <EntitySet Name="Ciudad" EntityType="Self.Ciudad" />
+          <EntitySet Name="funcion" EntityType="Self.funcion" />
+          <EntitySet Name="sala" EntityType="Self.sala" />
+          <EntitySet Name="tipo_sala" EntityType="Self.tipo_sala" />
+          <AssociationSet Name="FK_Alumno_Ciudad" Association="Self.FK_Alumno_Ciudad">
+            <End Role="Ciudad" EntitySet="Ciudad" />
+            <End Role="Alumno" EntitySet="Alumno" />
+          </AssociationSet>
+          <AssociationSet Name="FK_asiento_sala" Association="Self.FK_asiento_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="asiento" EntitySet="asiento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_funcion_sala" Association="Self.FK_funcion_sala">
+            <End Role="sala" EntitySet="sala" />
+            <End Role="funcion" EntitySet="funcion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_sala_tipo_sala" Association="Self.FK_sala_tipo_sala">
+            <End Role="tipo_sala" EntitySet="tipo_sala" />
+            <End Role="sala" EntitySet="sala" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="INGENIO_LA_UNIONModelStoreContainer" CdmEntityContainer="INGENIO_LA_UNIONEntities">
+          <EntitySetMapping Name="Alumno">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.Alumno">
+              <MappingFragment StoreEntitySet="Alumno">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="CodCiudad" ColumnName="CodCiudad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="asiento">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.asiento">
+              <MappingFragment StoreEntitySet="asiento">
+                <ScalarProperty Name="id_asiento" ColumnName="id_asiento" />
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+                <ScalarProperty Name="numero_asiento" ColumnName="numero_asiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ciudad">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.Ciudad">
+              <MappingFragment StoreEntitySet="Ciudad">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="funcion">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.funcion">
+              <MappingFragment StoreEntitySet="funcion">
+                <ScalarProperty Name="id_funcion" ColumnName="id_funcion" />
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+                <ScalarProperty Name="id_pelicula" ColumnName="id_pelicula" />
+                <ScalarProperty Name="horario" ColumnName="horario" />
+                <ScalarProperty Name="activo" ColumnName="activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sala">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.sala">
+              <MappingFragment StoreEntitySet="sala">
+                <ScalarProperty Name="id_sala" ColumnName="id_sala" />
+                <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />
+                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
+                <ScalarProperty Name="nombre_sala" ColumnName="nombre_sala" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_sala">
+            <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.tipo_sala">
+              <MappingFragment StoreEntitySet="tipo_sala">
+                <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -176,31 +176,43 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Alumno.cs">
-      <DependentUpon>ModelAlumno.tt</DependentUpon>
+      <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AlumnoCE.cs" />
+    <Compile Include="Models\asiento.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Ciudad.cs">
-      <DependentUpon>ModelAlumno.tt</DependentUpon>
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\funcion.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IndexModel.cs" />
-    <Compile Include="Models\ModelAlumno.Context.cs">
+    <Compile Include="Models\ModelCinema.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelAlumno.Context.tt</DependentUpon>
+      <DependentUpon>ModelCinema.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelAlumno.cs">
+    <Compile Include="Models\ModelCinema.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelAlumno.tt</DependentUpon>
+      <DependentUpon>ModelCinema.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelAlumno.Designer.cs">
+    <Compile Include="Models\ModelCinema.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelAlumno.edmx</DependentUpon>
+      <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Movie.cs" />
     <Compile Include="Models\Pelicula.cs" />
+    <Compile Include="Models\sala.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tipo_sala.cs">
+      <DependentUpon>ModelCinema.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ServicePelicula.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -211,24 +223,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\ModelAlumno.Context.tt">
+    <Content Include="Models\ModelCinema.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>ModelAlumno.Context.cs</LastGenOutput>
-      <DependentUpon>ModelAlumno.edmx</DependentUpon>
+      <DependentUpon>ModelCinema.edmx</DependentUpon>
+      <LastGenOutput>ModelCinema.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelAlumno.tt">
+    <Content Include="Models\ModelCinema.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelAlumno.edmx</DependentUpon>
-      <LastGenOutput>ModelAlumno.cs</LastGenOutput>
+      <DependentUpon>ModelCinema.edmx</DependentUpon>
+      <LastGenOutput>ModelCinema.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\ModelAlumno.edmx">
+    <EntityDeploy Include="Models\ModelCinema.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelAlumno.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelCinema.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelAlumno.edmx.diagram">
-      <DependentUpon>ModelAlumno.edmx</DependentUpon>
+    <Content Include="Models\ModelCinema.edmx.diagram">
+      <DependentUpon>ModelCinema.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\CinemaIngenioLaUnion20210226093714 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />

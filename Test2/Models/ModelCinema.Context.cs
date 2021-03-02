@@ -13,10 +13,10 @@ namespace Test2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class AlumnosContext : DbContext
+    public partial class INGENIO_LA_UNIONEntities : DbContext
     {
-        public AlumnosContext()
-            : base("name=AlumnosContext")
+        public INGENIO_LA_UNIONEntities()
+            : base("name=INGENIO_LA_UNIONEntities")
         {
         }
     
@@ -26,6 +26,10 @@ namespace Test2.Models
         }
     
         public virtual DbSet<Alumno> Alumno { get; set; }
+        public virtual DbSet<asiento> asiento { get; set; }
         public virtual DbSet<Ciudad> Ciudad { get; set; }
+        public virtual DbSet<funcion> funcion { get; set; }
+        public virtual DbSet<sala> sala { get; set; }
+        public virtual DbSet<tipo_sala> tipo_sala { get; set; }
     }
 }

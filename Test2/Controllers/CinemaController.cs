@@ -17,21 +17,9 @@ namespace Test2.Controllers
         // GET: Cinema
         public ActionResult Index()
         {
-            TMDbClient client = new TMDbClient("38a98b7311a75b1913c0c24280d13024");
-            SearchContainer<SearchMovie> popularMovies = client.GetMoviePopularListAsync("en-US", 1, null).Result;
-            List<SearchMovie> popularMovieList = popularMovies.Results;
-
-            List<Models.Movie> listPopularMovies=new List<Models.Movie>();
-
-            foreach (SearchMovie pularMovie in popularMovieList) {
-                Models.Movie m = new Models.Movie();
-                m.id = pularMovie.Id;
-                m.title = pularMovie.Title;
-                m.release_date = m.release_date;
-                listPopularMovies.Add(m);
-            }
+            
                 
-                return View(listPopularMovies);
+                return View();
         }
 
 

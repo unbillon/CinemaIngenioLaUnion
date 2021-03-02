@@ -25,7 +25,7 @@ namespace Test2.Controllers
 		                                c.Nombre as nombreCiudad		
                                 from		Alumno		a
                                 inner join	Ciudad		c	on (a.CodCiudad=c.Id);";
-                using (var db = new AlumnosContext())
+                using (var db = new INGENIO_LA_UNIONEntities())
                 {
                     /*var data = from a in db.Alumno
                                join c in db.Ciudad on a.CodCiudad equals c.id
@@ -49,7 +49,7 @@ namespace Test2.Controllers
                 throw;
             }
             
-            //AlumnosContext db = new AlumnosContext();
+            //INGENIO_LA_UNIONEntities db = new INGENIO_LA_UNIONEntities();
             //List<Alumno> lista= db.Alumno.Where(a=>a.Edad>18).ToList();
             
         }
@@ -59,7 +59,7 @@ namespace Test2.Controllers
         }
 
         public ActionResult ListaCiudades() {
-            using (var db = new AlumnosContext()) {
+            using (var db = new INGENIO_LA_UNIONEntities()) {
                 return PartialView(db.Ciudad.ToList());
             }
         }
@@ -76,7 +76,7 @@ namespace Test2.Controllers
 
             try
             {
-                using (AlumnosContext db = new AlumnosContext())
+                using (INGENIO_LA_UNIONEntities db = new INGENIO_LA_UNIONEntities())
                 {
                     db.Alumno.Add(a);
                     a.FechaRegistro = DateTime.Now;
@@ -98,7 +98,7 @@ namespace Test2.Controllers
 
         public ActionResult Editar(int id) {
 
-            using (var db = new AlumnosContext()) {
+            using (var db = new INGENIO_LA_UNIONEntities()) {
 
                 //Alumno al = db.Alumno.Where(a => a.ID == id).FirstOrDefault();
                 Alumno al2 = db.Alumno.Find(id);
@@ -115,7 +115,7 @@ namespace Test2.Controllers
 
             try
             {
-                using (var db = new AlumnosContext()) {
+                using (var db = new INGENIO_LA_UNIONEntities()) {
 
                     if (!ModelState.IsValid)
                         return View();
@@ -143,7 +143,7 @@ namespace Test2.Controllers
 
             try
             {
-                using (var db = new AlumnosContext())
+                using (var db = new INGENIO_LA_UNIONEntities())
                 {
                     Alumno al2 = db.Alumno.Find(id);
                     return View(al2);
@@ -163,7 +163,7 @@ namespace Test2.Controllers
 
             try
             {
-                using (var db = new AlumnosContext())
+                using (var db = new INGENIO_LA_UNIONEntities())
                 {
                     Alumno al2 = db.Alumno.Find(id);
                     db.Alumno.Remove(al2);
@@ -181,7 +181,7 @@ namespace Test2.Controllers
         }
 
         public static String NombreCiudad(int codCiudad) {
-            using (var db = new AlumnosContext()) {
+            using (var db = new INGENIO_LA_UNIONEntities()) {
                 return db.Ciudad.Find(codCiudad).Nombre;
             }
         }
