@@ -16,6 +16,7 @@ namespace Test2.Controllers
     public class CinemaLaUnionController : Controller
     {
         ServicePelicula servicePelicula = new ServicePelicula();
+        ServiceTicket servictTicket = new ServiceTicket();
         // GET: CinemaLaUnion
         public ActionResult Index()
         {
@@ -32,8 +33,8 @@ namespace Test2.Controllers
             return View(servicePelicula.obtenerFunciones(id));
         }
 
-        public ActionResult GuardarTicket() {
-            return View();
+        public ActionResult GuardarTicket(int id) {
+            return View(servictTicket.obtenerTicketInfo(id));
         }
 
 

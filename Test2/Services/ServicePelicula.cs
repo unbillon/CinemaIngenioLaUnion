@@ -30,7 +30,7 @@ namespace Test2.Services
             indexModel = new IndexModel();
         }
 
-        private Pelicula obtenerPeliculaServicio(int idPelicula) {
+        public Pelicula obtenerPeliculaServicio(int idPelicula) {
             Movie m = client.GetMovieAsync(idPelicula, "es").Result;
             Pelicula p = new Pelicula();
             p.Id = m.Id;
@@ -51,7 +51,17 @@ namespace Test2.Services
             p.Overview = m.Overview;
             p.Genres = m.Genres;
             p.listVideo = client.GetMovieVideosAsync(p.Id).Result;
+
+            try { 
             p.trailerPath = "https://www.youtube.com/embed/" + client.GetMovieVideosAsync(m.Id).Result.Results.ElementAt(0).Key;
+            } catch(Exception e)
+            {
+
+                p.trailerPath = "TRAILER NO DISPONIBLE";
+            }
+
+
+
             return p;
 
         }

@@ -223,7 +223,11 @@
                                                                                                 }
 
                                                                                                 <p class="tags">
-                                                                                                    <span class="time"><a href="#">@Html.DisplayFor(modelItem => item.horario.Hour):@Html.DisplayFor(modelItem => item.horario.Minute) - @Html.DisplayFor(modelItem => item.sala.tipo_sala.Nombre)</a></span>
+                                                                                                    <span class="time">
+   
+    @Html.ActionLink(item.horario.Hour+":"+item.horario.Minute+":"+item.sala.tipo_sala.Nombre, "GuardarTicket", new { id = item.id_funcion })
+
+</span>
                                                                                                 </p>
 
 

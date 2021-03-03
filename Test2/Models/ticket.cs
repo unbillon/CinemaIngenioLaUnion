@@ -19,6 +19,8 @@ namespace Test2.Models
         {
             this.ticket_asiento = new HashSet<ticket_asiento>();
         }
+
+        public Pelicula pelicula { get; set; }
     
         public int id_ticket { get; set; }
         public int id_funcion { get; set; }

@@ -219,6 +219,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ServicePelicula.cs" />
+    <Compile Include="Services\ServiceTicket.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -229,6 +230,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\uploads\pantallacine.png" />
+    <Content Include="js\Tween.js" />
     <Content Include="Models\ModelCinema.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelCinema.edmx</DependentUpon>

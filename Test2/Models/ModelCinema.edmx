@@ -50,6 +50,8 @@
           <Property Name="ubicacion" Type="int" Nullable="false" />
           <Property Name="id_tipo_sala" Type="int" Nullable="false" />
           <Property Name="nombre_sala" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="numero_filas" Type="int" Nullable="false" />
+          <Property Name="asientos_por_fila" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ticket">
           <Key>
@@ -295,6 +297,8 @@
           <NavigationProperty Name="asiento" Relationship="INGENIO_LA_UNIONModel.FK_asiento_sala" FromRole="sala" ToRole="asiento" />
           <NavigationProperty Name="funcion" Relationship="INGENIO_LA_UNIONModel.FK_funcion_sala" FromRole="sala" ToRole="funcion" />
           <NavigationProperty Name="tipo_sala" Relationship="INGENIO_LA_UNIONModel.FK_sala_tipo_sala" FromRole="sala" ToRole="tipo_sala" />
+          <Property Name="numero_filas" Type="Int32" Nullable="false" />
+          <Property Name="asientos_por_fila" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="ticket">
           <Key>
@@ -461,6 +465,8 @@
           <EntitySetMapping Name="sala">
             <EntityTypeMapping TypeName="INGENIO_LA_UNIONModel.sala">
               <MappingFragment StoreEntitySet="sala">
+                <ScalarProperty Name="asientos_por_fila" ColumnName="asientos_por_fila" />
+                <ScalarProperty Name="numero_filas" ColumnName="numero_filas" />
                 <ScalarProperty Name="nombre_sala" ColumnName="nombre_sala" />
                 <ScalarProperty Name="id_tipo_sala" ColumnName="id_tipo_sala" />
                 <ScalarProperty Name="ubicacion" ColumnName="ubicacion" />

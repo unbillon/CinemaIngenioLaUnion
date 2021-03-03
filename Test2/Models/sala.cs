@@ -25,6 +25,8 @@ namespace Test2.Models
         public int ubicacion { get; set; }
         public int id_tipo_sala { get; set; }
         public string nombre_sala { get; set; }
+        public int numero_filas { get; set; }
+        public int asientos_por_fila { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<asiento> asiento { get; set; }
