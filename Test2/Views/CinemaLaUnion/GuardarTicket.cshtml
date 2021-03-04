@@ -180,8 +180,8 @@
                                     top: 50%;
                                     transform: translate(-50%, -50%);
                                     background: rgba(255,255,255,0.3);
-                                    width: 30px;
-                                    height: 30px;
+                                    width: 40px;
+                                    height: 40px;
                                     text-align: center;
                                     line-height: 40px;
                                     z-index: 10;
@@ -203,16 +203,28 @@
                                 int cantAsientosPorFila = Model.funcion.sala.asientos_por_fila;
                                 int idAsiento = 1;
 
-                                for (int i = 1; i < cantFilas; i++)
+                                for (int i = 1; i <= cantFilas; i++)
                                 {
                                                         <ul class="tag-items">
                                                             @for (int j = 1; j <= cantAsientosPorFila; j++)
                                                             {
-                                                                <li><a href="#">@idAsiento</a></li>
-                                                                idAsiento++;
                                                                 
-                                                            }
-                                                        </ul>
+                                                                    <div class="like-container">
+                                                                        <div class="like-cnt unchecked" id="like-cnt-@idAsiento" onclick="reservaAsiento(@idAsiento)">
+                                                                            @idAsiento
+
+
+                                                                        </div>
+
+
+                                                                    </div>
+
+
+
+
+                                                                    idAsiento++;
+                                                                    }
+                                                            </ul>
                                 }
                             }
                         </div>
@@ -289,31 +301,53 @@
 
 <script>
 
+    var check_status_arr = [false];
+
+    var arr_asientos_seleccionados=new Array();
+
+    for (i = 0; i < 1000; i++) {
+        check_status_arr.push(false);  
+    }
 
     var check_status = false;
-    var like_cnt_1 = $("#like-cnt-1");
-    var like_parent = $(".like-container");
+    function reservaAsiento(valor) {
 
+        
+        var like_cnt = $("#like-cnt-" + valor);
+        var like_parent = $(".like-container");
 
-    $("#like-cnt-1").click(function () {
         var t1 = new TimelineLite();
         var t2 = new TimelineLite();
-        if (!check_status) {
-            t1.set(like_cnt_1, { scale: 0 });
+        
+
+        if (check_status_arr[valor]==false) {
+            t1.set(like_cnt, { scale: 0 });
             t1.set('.like-btn', { scale: 0 });
-            t1.to(like_cnt_1, 0.6, { scale: 1, background: '#ddca7e', ease: Expo.easeOut });
+            t1.to(like_cnt, 0.6, { scale: 1, background: '#ddca7e', ease: Expo.easeOut });
             t2.to('.like-btn', 0.65, { scale: 1, ease: Elastic.easeOut.config(1, 0.3) }, '+=0.2');
             //    t1.timeScale(5);
-            check_status = true;
+            check_status_arr[valor] = true;
+            document.getElementById("like-cnt-" + valor).title = "0";
             //circleShape.replay();
+            arr_asientos_seleccionados.push(valor);
 
         }
         else {
-            t1.to(like_cnt_1, 1, { scale: 1 })
-                .to(like_cnt_1, 1, { scale: 1, background: 'rgba(255,255,255,0.3)', ease: Power4.easeOut });
+            t1.to(like_cnt, 1, { scale: 1 })
+                .to(like_cnt, 1, { scale: 1, background: 'rgba(255,255,255,0.3)', ease: Power4.easeOut });
             t1.timeScale(7);
-            check_status = false;
+            check_status_arr[valor] = false;
+            removeItemFromArr(arr_asientos_seleccionados, valor);
         }
 
-    })
+    }
+
+    function removeItemFromArr(arr, item) {
+        var i = arr.indexOf(item);
+
+        if (i !== -1) {
+            arr.splice(i, 1);
+        }
+    }
+
 </script>
