@@ -137,28 +137,25 @@
         <div class="row ipad-width2">
             <div class="col-md-4 col-sm-12 col-xs-12">
                 <div class="movie-img sticky-sb">
-                    <img src="@Html.DisplayFor(model => Model.PosterPath)" alt="">
+                    <img src="@Html.DisplayFor(model => Model.pelicula.PosterPath)" alt="">
                     <div class="movie-btn">
                         <div class="btn-transform transform-vertical red">
 
 
                         </div>
-                        <div class="btn-transform transform-vertical">
-                            <div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Comprar Ticket</a></div>
-                            <div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
             <div class="col-md-8 col-sm-12 col-xs-12">
                 <div class="movie-single-ct main-content">
-                    <h1 class="bd-hd">@Html.DisplayFor(model => Model.Title)</h1>
-
+                    <h1 class="bd-hd">Que disfrutes tu pelicula</h1>
+                    
                     <div class="movie-rate">
                         <div class="rate">
                             <i class="ion-android-star"></i>
                             <p>
-                                <span>Calificación @Html.DisplayFor(model => Model.VoteAverage)</span> /10<br>
+                                <span>Debes presentar este ticket en caja y realizar tu pago. </span>
 
                             </p>
                         </div>
@@ -167,7 +164,7 @@
                     <div class="movie-tabs">
                         <div class="tabs">
                             <ul class="tab-links tabs-mv">
-                                <li class="active"><a href="#overview">Sinopsis</a></li>
+                                <li class="active"><a href="#overview">Ticket No. @Html.DisplayFor(model=>Model.id_ticket)</a></li>
 
                             </ul>
 
@@ -177,18 +174,14 @@
                                 <div id="overview" class="tab active">
                                     <div class="row">
                                         <div class="col-md-8 col-sm-12 col-xs-12">
-                                            <p>@Html.DisplayFor(Model => Model.Overview)</p>
-
-
-                                            <div class="mvsingle-item ov-item">
-
-
-                                                <iframe width="560" height="315" src="@Html.DisplayFor(model => Model.trailerPath)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-                                            </div>
-
-
-
+                                            <span>Horario: </span>
+                                            <p>@Html.DisplayFor(Model => Model.funcion.horario)</p>
+                                            <span>Fecha de Compra: </span>
+                                            <p>@Html.DisplayFor(Model => Model.fecha_compra)</p>
+                                            <span>Pelicula: </span>
+                                            <p>@Html.DisplayFor(Model => Model.pelicula.Title)</p>
+                                            <span>Sala </span>
+                                            <p>@Html.DisplayFor(Model => Model.funcion.sala.nombre_sala)</p>
 
                                         </div>
 
@@ -196,48 +189,20 @@
 
 
                                     <div class="title-hd-sm">
-                                        <h4>HORARIOS</h4>
+                                        <h4>Asientos Reservados:</h4>
                                     </div>
 
-                                    <div class="sb-it">
-                                        <table>
+
+                                    <span>*</span>
+                                    @foreach (Test2.Models.ticket_asiento item in Model.ticket_asiento)
+                                    {
+
+                                        @Html.DisplayFor(model => item.id_asiento);
+                                        <span>*</span>
+
+                                    }
 
 
-
-                                            @{
-                                                DateTime tempDate = new DateTime();
-                                                String tipoSala = "";
-                                                foreach (var item in Model.listFunciones)
-                                                {
-                                                    <tr>
-                                                        <td>
-
-                                                            @if (tempDate != item.horario.Date)
-                                                            {
-
-                                                                <h6>@Html.DisplayFor(date => item.horario.Day) / @Html.DisplayFor(date => item.horario.Month) / @Html.DisplayFor(date => item.horario.Year)</h6>
-                                                                tipoSala = "";
-                                                                tempDate = item.horario.Date;
-                                                                tipoSala = item.sala.tipo_sala.Nombre;
-                                                            }
-
-                                                            <p class="tags">
-                                                                <span class="time">
-
-                                                                    @Html.ActionLink(item.horario.Hour + ":" + item.horario.Minute + ":" + item.sala.tipo_sala.Nombre, "GuardarTicket", new { id = item.id_funcion })
-
-                                                                </span>
-                                                            </p>
-
-
-                                                        </td>
-                                                    </tr>
-                                                }
-                                            }
-
-
-                                        </table>
-                                    </div>
                                 </div>
 
                             </div>

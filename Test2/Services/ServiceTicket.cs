@@ -56,14 +56,15 @@ namespace Test2.Services
 
             using (var db = new INGENIO_LA_UNIONEntities())
             {
-                t= db.ticket.Where(a => a.id_ticket == idTicket).ToList().ElementAt(0);
+                db.Configuration.LazyLoadingEnabled = false;
+                t = db.ticket.Where(a => a.id_ticket == idTicket).ToList().ElementAt(0);
                 funcion f = db.funcion.Where(a => a.id_funcion == t.id_funcion).ToList().ElementAt(0);
                 Pelicula p = servicePelicula.obtenerPeliculaServicio(f.id_pelicula);
                 sala s = db.sala.Where(a => a.id_sala == f.id_sala).ToList().ElementAt(0);
                 tipo_sala ts = db.tipo_sala.Where(a => a.id_tipo_sala == s.id_tipo_sala).ToList().ElementAt(0);
                 List<asiento> listAsiento = db.asiento.Where(a => a.id_sala == s.id_sala).ToList().ToList();
-                List<ticket_asiento> listTicketAsiento = db.ticket_asiento.Where(a => a.id_ticket == t.id_ticket).ToList();
-
+                List<ticket_asiento> listTicketAsiento = db.ticket_asiento.Where(a => a.id_ticket == idTicket).ToList();
+                //t = db.ticket.Include(c => c.ticket_asiento).ToList());
 
 
                 s.tipo_sala = ts;
