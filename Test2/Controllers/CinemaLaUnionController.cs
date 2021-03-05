@@ -37,6 +37,21 @@ namespace Test2.Controllers
             return View(servictTicket.obtenerTicketInfo(id));
         }
 
+        public ActionResult ticket(int id, int[] arr_asientos_seleccionados) {
+            ticket t =servictTicket.guardarTicketInfo(id, arr_asientos_seleccionados);
+            var redirectUrl = new UrlHelper(Request.RequestContext).Action("ticketPagina", "CinemaLaUnion", new { id = t.id_ticket });
+            return Json(new { Url = redirectUrl });
+
+            //return View(servictTicket.guardarTicketInfo(id, arr_asientos_seleccionados));
+        }
+
+
+        public ActionResult ticketPagina(int id)
+        {
+           return View(servictTicket.obtenerInfoTicketReservado(id));
+        }
+
+
 
     }
 }

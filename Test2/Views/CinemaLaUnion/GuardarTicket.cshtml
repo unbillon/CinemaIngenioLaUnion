@@ -162,7 +162,7 @@
 
                     <img src="@Url.Content("~/images/uploads/pantallacine.png")" width="700">
 
-                    
+
 
 
                     <div class="sidebar">
@@ -187,6 +187,19 @@
                                     z-index: 10;
                                 }
 
+                                .like-cnt-reservado {
+                                    cursor: pointer;
+                                    left: 50%;
+                                    top: 50%;
+                                    transform: translate(-50%, -50%);
+                                    background: red;
+                                    width: 40px;
+                                    height: 40px;
+                                    text-align: center;
+                                    line-height: 40px;
+                                    z-index: 10;
+                                }
+
                                 .like-btn {
                                     color: #fff;
                                 }
@@ -202,29 +215,43 @@
                                 int cantFilas = Model.funcion.sala.numero_filas;
                                 int cantAsientosPorFila = Model.funcion.sala.asientos_por_fila;
                                 int idAsiento = 1;
+                                List<Test2.Models.ticket_asiento> listTicketAsiento = Model.ticket_asiento.ToList();
 
                                 for (int i = 1; i <= cantFilas; i++)
                                 {
-                                                        <ul class="tag-items">
-                                                            @for (int j = 1; j <= cantAsientosPorFila; j++)
-                                                            {
-                                                                
-                                                                    <div class="like-container">
-                                                                        <div class="like-cnt unchecked" id="like-cnt-@idAsiento" onclick="reservaAsiento(@idAsiento)">
-                                                                            @idAsiento
+                                    <ul class="tag-items">
+                                        @for (int j = 1; j <= cantAsientosPorFila; j++)
+                                        {
+                                            Test2.Models.ticket_asiento ts_temp = listTicketAsiento.Find(x => x.id_asiento == idAsiento);
+
+                                            if (ts_temp == null)
+                                            {
+
+                                                <div class="like-container">
+                                                    <div class="like-cnt unchecked" id="like-cnt-@idAsiento" onclick="reservaAsiento(@idAsiento)">
+                                                        @idAsiento
+                                                    </div>
 
 
-                                                                        </div>
+                                                </div>
+                                            }
+                                            else
+                                            {
+
+                                                <div class="like-container">
+                                                    <div class="like-cnt-reservado unchecked" id="like-cnt-@idAsiento">
+                                                        @idAsiento
+                                                    </div>
 
 
-                                                                    </div>
+                                                </div>
+                                            }
 
 
 
-
-                                                                    idAsiento++;
-                                                                    }
-                                                            </ul>
+                                            idAsiento++;
+                                        }
+                                    </ul>
                                 }
                             }
                         </div>
@@ -236,10 +263,17 @@
                     <!-- share link -->
                     <!-- comment items -->
 
+
+                    
+                    <input type="button" id="hl-send-array" value="Pinchame y verás"  />
+
+
+
+
                     <div class="comment-form">
-                        
+
                         <form action="#">
-                           
+
                             <input class="submit" type="submit" placeholder="submit">
                         </form>
                     </div>
@@ -299,28 +333,29 @@
 
 
 
+
 <script>
 
     var check_status_arr = [false];
 
-    var arr_asientos_seleccionados=new Array();
+    var arrjs_asientos_seleccionados = new Array();
 
     for (i = 0; i < 1000; i++) {
-        check_status_arr.push(false);  
+        check_status_arr.push(false);
     }
 
     var check_status = false;
     function reservaAsiento(valor) {
 
-        
+
         var like_cnt = $("#like-cnt-" + valor);
         var like_parent = $(".like-container");
 
         var t1 = new TimelineLite();
         var t2 = new TimelineLite();
-        
 
-        if (check_status_arr[valor]==false) {
+
+        if (check_status_arr[valor] == false) {
             t1.set(like_cnt, { scale: 0 });
             t1.set('.like-btn', { scale: 0 });
             t1.to(like_cnt, 0.6, { scale: 1, background: '#ddca7e', ease: Expo.easeOut });
@@ -329,7 +364,7 @@
             check_status_arr[valor] = true;
             document.getElementById("like-cnt-" + valor).title = "0";
             //circleShape.replay();
-            arr_asientos_seleccionados.push(valor);
+            arrjs_asientos_seleccionados.push(valor);
 
         }
         else {
@@ -337,7 +372,7 @@
                 .to(like_cnt, 1, { scale: 1, background: 'rgba(255,255,255,0.3)', ease: Power4.easeOut });
             t1.timeScale(7);
             check_status_arr[valor] = false;
-            removeItemFromArr(arr_asientos_seleccionados, valor);
+            removeItemFromArr(arrjs_asientos_seleccionados, valor);
         }
 
     }
@@ -350,4 +385,30 @@
         }
     }
 
+
+
+
 </script>
+
+
+
+<script type="text/javascript">
+        $("#hl-send-array").on("click", function (e) {
+            console.log("llega a la funcion");
+            e.preventDefault();
+            $.ajax({
+            type: "post",
+            dataType: "json",
+            url: "/CinemaLaUnion/ticket",
+                data: {
+                    id: "@Model.funcion.id_funcion",
+                arr_asientos_seleccionados: arrjs_asientos_seleccionados 
+            },
+            success: function (data) {
+                window.location.href = data.Url;
+            },
+        });
+        });
+
+</script>
+

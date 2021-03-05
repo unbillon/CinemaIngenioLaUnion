@@ -510,6 +510,8 @@
     <Content Include="fonts\fontawesome-webfontd41d.eot" />
     <Content Include="Views\CinemaLaUnion\Index.cshtml" />
     <Content Include="Views\Cinema\DetallePelicula.cshtml" />
+    <Content Include="Views\CinemaLaUnion\ticket.cshtml" />
+    <Content Include="Views\CinemaLaUnion\ticketPagina.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

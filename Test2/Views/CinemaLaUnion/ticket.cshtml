@@ -1,0 +1,280 @@
+﻿@model Test2.Models.ticket
+
+@model Test2.Models.Pelicula
+
+<!--preloading-->
+<div id="preloader">
+    <img class="logo" src="@Url.Content("~/images/logo1.png")" alt="" width="119" height="58">
+    <div id="status">
+        <span></span>
+        <span></span>
+    </div>
+</div>
+<!--end of preloading-->
+<!--login form popup-->
+<div class="login-wrapper" id="login-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>Login</h3>
+        <form method="post" action="#">
+            <div class="row">
+                <label for="username">
+                    Username:
+                    <input type="text" name="username" id="username" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+            </div>
+
+            <div class="row">
+                <label for="password">
+                    Password:
+                    <input type="password" name="password" id="password" placeholder="******" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+                <div class="remember">
+                    <div>
+                        <input type="checkbox" name="remember" value="Remember me"><span>Remember me</span>
+                    </div>
+                    <a href="#">Forget password ?</a>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div class="row">
+            <p>Or via social</p>
+            <div class="social-btn-2">
+                <a class="fb" href="#"><i class="ion-social-facebook"></i>Facebook</a>
+                <a class="tw" href="#"><i class="ion-social-twitter"></i>twitter</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--end of login form popup-->
+<!--signup form popup-->
+<div class="login-wrapper" id="signup-content">
+    <div class="login-content">
+        <a href="#" class="close">x</a>
+        <h3>sign up</h3>
+        <form method="post" action="#">
+            <div class="row">
+                <label for="username-2">
+                    Username:
+                    <input type="text" name="username" id="username-2" placeholder="Hugh Jackman" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{8,20}$" required="required" />
+                </label>
+            </div>
+
+            <div class="row">
+                <label for="email-2">
+                    your email:
+                    <input type="password" name="email" id="email-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+                <label for="password-2">
+                    Password:
+                    <input type="password" name="password" id="password-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+                <label for="repassword-2">
+                    re-type Password:
+                    <input type="password" name="password" id="repassword-2" placeholder="" pattern="(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required="required" />
+                </label>
+            </div>
+            <div class="row">
+                <button type="submit">sign up</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!--end of signup form popup-->
+<!-- BEGIN | Header -->
+<header class="ht-header">
+    <div class="container">
+        <nav class="navbar navbar-default navbar-custom">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header logo">
+                <div class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <div id="nav-icon1">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+                <a href="index-2.html"><img class="logo" src="@Url.Content("~/images/logo1.png")" alt="" width="119" height="58"></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <!-- top search form -->
+        <div class="top-search">
+            <select>
+                <option value="united">TV show</option>
+                <option value="saab">Others</option>
+            </select>
+            <input type="text" placeholder="Search for a movie, TV Show or celebrity that you are looking for">
+        </div>
+    </div>
+</header>
+<!-- END | Header -->
+
+<div class="hero mv-single-hero">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <h1> movie listing - list</h1>
+                <ul class="breadcumb">
+                    <li class="active"><a href="#">Home</a></li>
+                    <li> <span class="ion-ios-arrow-right"></span> movie listing</li>
+                </ul> -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-single movie-single movie_single">
+    <div class="container">
+        <div class="row ipad-width2">
+            <div class="col-md-4 col-sm-12 col-xs-12">
+                <div class="movie-img sticky-sb">
+                    <img src="@Html.DisplayFor(model => Model.PosterPath)" alt="">
+                    <div class="movie-btn">
+                        <div class="btn-transform transform-vertical red">
+
+
+                        </div>
+                        <div class="btn-transform transform-vertical">
+                            <div><a href="#" class="item item-1 yellowbtn"> <i class="ion-card"></i> Comprar Ticket</a></div>
+                            <div><a href="#" class="item item-2 yellowbtn"><i class="ion-card"></i></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8 col-sm-12 col-xs-12">
+                <div class="movie-single-ct main-content">
+                    <h1 class="bd-hd">@Html.DisplayFor(model => Model.Title)</h1>
+
+                    <div class="movie-rate">
+                        <div class="rate">
+                            <i class="ion-android-star"></i>
+                            <p>
+                                <span>Calificación @Html.DisplayFor(model => Model.VoteAverage)</span> /10<br>
+
+                            </p>
+                        </div>
+
+                    </div>
+                    <div class="movie-tabs">
+                        <div class="tabs">
+                            <ul class="tab-links tabs-mv">
+                                <li class="active"><a href="#overview">Sinopsis</a></li>
+
+                            </ul>
+
+
+
+                            <div class="tab-content">
+                                <div id="overview" class="tab active">
+                                    <div class="row">
+                                        <div class="col-md-8 col-sm-12 col-xs-12">
+                                            <p>@Html.DisplayFor(Model => Model.Overview)</p>
+
+
+                                            <div class="mvsingle-item ov-item">
+
+
+                                                <iframe width="560" height="315" src="@Html.DisplayFor(model => Model.trailerPath)" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+                                            </div>
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="title-hd-sm">
+                                        <h4>HORARIOS</h4>
+                                    </div>
+
+                                    <div class="sb-it">
+                                        <table>
+
+
+
+                                            @{
+                                                DateTime tempDate = new DateTime();
+                                                String tipoSala = "";
+                                                foreach (var item in Model.listFunciones)
+                                                {
+                                                    <tr>
+                                                        <td>
+
+                                                            @if (tempDate != item.horario.Date)
+                                                            {
+
+                                                                <h6>@Html.DisplayFor(date => item.horario.Day) / @Html.DisplayFor(date => item.horario.Month) / @Html.DisplayFor(date => item.horario.Year)</h6>
+                                                                tipoSala = "";
+                                                                tempDate = item.horario.Date;
+                                                                tipoSala = item.sala.tipo_sala.Nombre;
+                                                            }
+
+                                                            <p class="tags">
+                                                                <span class="time">
+
+                                                                    @Html.ActionLink(item.horario.Hour + ":" + item.horario.Minute + ":" + item.sala.tipo_sala.Nombre, "GuardarTicket", new { id = item.id_funcion })
+
+                                                                </span>
+                                                            </p>
+
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+
+                                        </table>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section-->
+<footer class="ht-footer">
+    <div class="container">
+        <div class="flex-parent-ft">
+            <div class="flex-child-ft item1">
+                <a href="index-2.html"><img class="logo" src="images/logo1.png" alt=""></a>
+                <p>
+                    Ingenio la Union<br>
+                    Escuintla
+                </p>
+                <p>Call us: <a href="#">+502 78881966</a></p>
+            </div>
+
+            <div class="flex-child-ft item5">
+                <h4>Noticias</h4>
+                <p>Suscribete a nuestras promociones<br> para siempre contar con los mejores precios</p>
+                <form action="#">
+                    <input type="text" placeholder="Ingresa tu correo...">
+                </form>
+                <a href="#" class="btn">Suscribete ahora <i class="ion-ios-arrow-forward"></i></a>
+            </div>
+        </div>
+    </div>
+
+</footer>
+
+<!-- end of footer section-->
